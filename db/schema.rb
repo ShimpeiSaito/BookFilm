@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(version: 2021_12_29_082201) do
 
   create_table "members", force: :cascade do |t|
     t.string "login_id", null: false
-    t.string "password", null: false
     t.string "name", null: false
     t.date "birthday", null: false
     t.string "tel", null: false
@@ -49,8 +48,8 @@ ActiveRecord::Schema.define(version: 2021_12_29_082201) do
 
   create_table "reservationdetails", force: :cascade do |t|
     t.integer "reservation_id", null: false
-    t.integer "ticket_id", null: false
-    t.integer "seat_id", null: false
+    t.integer "ticket_id"
+    t.integer "seat_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["reservation_id"], name: "index_reservationdetails_on_reservation_id"

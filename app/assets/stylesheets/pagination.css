@@ -1,0 +1,30 @@
+nav.pagination {
+    font-size: 80%;
+    padding: 4px 8px;
+    border: 1px solid #499;
+    word-spacing: 3px;
+  }
+
+  nav.pagination span.page{
+    width: 20px;
+  }
+  
+  nav.pagination span.next{
+    width: 35px;
+  }
+
+  nav.pagination span.last{
+    width: 45px;
+  }
+
+  nav.pagination span.prev{
+    width: 35px;
+  }
+
+  nav.pagination span.first{
+    width: 45px;
+  }
+  
+  nav.pagination span.current {
+    font-weight: bold;
+  }
