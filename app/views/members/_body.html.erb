@@ -5,7 +5,7 @@
     </tr>
     <tr>
         <th width="150">パスワード</th>
-        <td></td>
+        <td>•••••••</td>
     </tr>
     <tr>
         <th width="150">氏名</th>
@@ -13,7 +13,7 @@
     </tr>
     <tr>
         <th width="150">生年月日</th>
-        <td><%= @member.birthday %></td>
+        <td><%= @member.birthday&.strftime("%Y年%m月%d日") %></td>
     </tr>
     <tr>
         <th width="150">電話番号</th>

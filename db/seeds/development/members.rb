@@ -13,6 +13,8 @@ end
         birthday: "#{rand(1980..2000)}-12-01",
         tel: random_number_generator(3) + "-" + random_number_generator(4) + "-" + random_number_generator(4),
         email: "#{names[idx]}@example.com",
-        payment: random_number_generator(4) + " " + random_number_generator(4) + " " + random_number_generator(4) + " " + random_number_generator(4)
+        payment: random_number_generator(4) + " " + random_number_generator(4) + " " + random_number_generator(4) + " " + random_number_generator(4),
+        password: "cinema!",
+        password_confirmation: "cinema!"
     )
 end

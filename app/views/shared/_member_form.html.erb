@@ -1,0 +1,37 @@
+<%= render "shared/errors", obj: @member %>
+
+<table class="attr">
+    <tr>
+        <th><%= form.label :login_id %></th>
+        <td><%= form.text_field :login_id, size: 8 %></td>
+    </tr>
+    <% if @member.new_record? %>
+        <tr>
+            <th><%= form.label :password, "パスワード" %></th>
+            <td><%= form.text_field :password %></td>
+        </tr>
+    <% end %>
+    <tr>
+        <th><%= form.label :name %></th>
+        <td><%= form.text_field :name %></td>
+    </tr>
+    <tr>
+        <th><%= form.label :birthday,
+                for: "member_birthday_1i" %></th>
+        <td><%= form.date_select :birthday,
+                start_year: 1940, end_year: Time.current.year,
+                use_month_numbers: true %></td>
+    </tr>
+    <tr>
+        <th><%= form.label :tel %></th>
+        <td><%= form.text_field :tel %></td>
+    </tr>
+    <tr>
+        <th><%= form.label :email %></th>
+        <td><%= form.text_field :email %></td>
+    </tr>
+    <tr>
+        <th><%= form.label :payment %></th>
+        <td><%= form.text_field :payment %></td>
+    </tr>
+</table>
