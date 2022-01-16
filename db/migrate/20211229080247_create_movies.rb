@@ -6,8 +6,8 @@ class CreateMovies < ActiveRecord::Migration[5.2]
       t.date :released_at, null: false
       t.date :expired_at, null: false
       t.integer :screening_time, null: false
-      t.text :distribution, null: false
-      t.string :director, null: false
+      t.text :distribution
+      t.string :director
 
       t.timestamps
     end

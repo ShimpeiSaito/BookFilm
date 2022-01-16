@@ -41,8 +41,8 @@ ActiveRecord::Schema.define(version: 2022_01_12_150500) do
     t.date "released_at", null: false
     t.date "expired_at", null: false
     t.integer "screening_time", null: false
-    t.text "distribution", null: false
-    t.string "director", null: false
+    t.text "distribution"
+    t.string "director"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -50,11 +50,10 @@ ActiveRecord::Schema.define(version: 2022_01_12_150500) do
   create_table "reservationdetails", force: :cascade do |t|
     t.integer "reservation_id", null: false
     t.integer "ticket_id"
-    t.integer "seat_id"
+    t.string "seat"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["reservation_id"], name: "index_reservationdetails_on_reservation_id"
-    t.index ["seat_id"], name: "index_reservationdetails_on_seat_id"
     t.index ["ticket_id"], name: "index_reservationdetails_on_ticket_id"
   end
 
@@ -75,14 +74,13 @@ ActiveRecord::Schema.define(version: 2022_01_12_150500) do
   create_table "schedules", force: :cascade do |t|
     t.integer "theater_id", null: false
     t.integer "movie_id", null: false
-    t.integer "screen_id", null: false
+    t.integer "screen_no", null: false
     t.date "screening_date", null: false
     t.time "starttime", null: false
     t.time "endtime", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["movie_id"], name: "index_schedules_on_movie_id"
-    t.index ["screen_id"], name: "index_schedules_on_screen_id"
     t.index ["theater_id"], name: "index_schedules_on_theater_id"
   end
 
@@ -114,7 +112,7 @@ ActiveRecord::Schema.define(version: 2022_01_12_150500) do
   end
 
   create_table "tickets", force: :cascade do |t|
-    t.string "type", null: false
+    t.string "t_type", null: false
     t.integer "total", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
