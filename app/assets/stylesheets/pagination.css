@@ -10,7 +10,7 @@ nav.pagination {
   }
   
   nav.pagination span.next{
-    width: 35px;
+    width: 45px;
   }
 
   nav.pagination span.last{
@@ -18,7 +18,7 @@ nav.pagination {
   }
 
   nav.pagination span.prev{
-    width: 35px;
+    width: 45px;
   }
 
   nav.pagination span.first{

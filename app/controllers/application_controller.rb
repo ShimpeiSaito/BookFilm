@@ -26,6 +26,7 @@ class ApplicationController < ActionController::Base
     end
     
     private def rescue_login_required(exception)
+        store_location
         render "errors/login_required", status: 403, layout: "error",
             formats: [:html]
     end
@@ -43,5 +44,16 @@ class ApplicationController < ActionController::Base
     private def rescue_internal_server_error(exception)
         render "errors/internal_server_error", status: 500, layout: "error",
             formats: [:html]
+    end
+
+    # 記憶したURL (もしくはデフォルト値) にリダイレクト
+    def redirect_back_or(default)
+      redirect_to(session[:forwarding_url] || default)
+      session.delete(:forwarding_url)
+    end
+  
+    # アクセスしようとしたURLを覚えておく
+    def store_location
+      session[:forwarding_url] = request.url if request.get?
     end
 end
