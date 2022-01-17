@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   resources :movies do
     get "search", on: :collection
   end
+
+  resources :theaters
 end

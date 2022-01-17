@@ -1,0 +1,25 @@
+<% @page_title = @theater.store_name + "の上映作品一覧" %>
+
+<h1><%= @page_title %></h1>
+
+<% if @movies.present? %>
+    <table class="list">
+        <thead>
+            <tr>
+                <th>タイトル</th>
+                <th>作品概要</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @movies.each do |movie| %>
+                <tr>
+                    <td><%= link_to movie.title, movie_path(movie.id) %></td>
+                    <td><%= movie.explanation %></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <%= paginate @movies %>
+<% else %>
+    <p>作品がありません。</p>
+<% end %>

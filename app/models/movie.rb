@@ -1,4 +1,6 @@
 class Movie < ApplicationRecord
+    has_many :schedules, dependent: :destroy
+
     class << self
         def search(query, m, w)
             rel = order(:title)

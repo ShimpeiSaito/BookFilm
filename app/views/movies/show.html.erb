@@ -1,2 +1,33 @@
-<h1>Movies#show</h1>
-<p>Find me in app/views/movies/show.html.erb</p>
+<% @page_title = @movie.title %>
+<h1><%= @movie.title %></h1>
+
+<table class="attr">
+  <tr>
+    <th width="100">タイトル</th>
+    <td><%= @movie.title %></td>
+  </tr>
+  <tr>
+    <th>作品概要</th>
+    <td><%= simple_format(@movie.explanation) %></td>
+  </tr>
+  <tr>
+    <th>公開開始日</th>
+    <td><%= @movie.released_at.strftime("%Y/%m/%d") %></td>
+  </tr>
+  <tr>
+    <th>公開終了日</th>
+    <td><%= @movie.expired_at.try(:strftime, "%Y/%m/%d") %></td>
+  </tr>
+  <tr>
+    <th>上映時間</th>
+    <td><%= @movie.screening_time %>分</td>
+  </tr>
+  <tr>
+    <th>配給</th>
+    <td><%= @movie.distribution %></td>
+  </tr>
+  <tr>
+    <th>監督</th>
+    <td><%= @movie.director %></td>
+  </tr>
+</table>

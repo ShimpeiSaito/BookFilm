@@ -5,7 +5,7 @@ titles = %w(映画1 映画2 映画3 映画4 映画5 映画6 映画7 映画8 映�
         title: titles[idx],
         explanation: "面白い映画です。",
         released_at: 10.days.ago.advance(days: idx),
-        expired_at: 10.days.before.advance(days: idx),
+        expired_at: 10.days.since.advance(days: idx),
         screening_time: idx * 10,
         distribution: "東宝",
         director: "宮崎駿"
