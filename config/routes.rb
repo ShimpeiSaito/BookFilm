@@ -17,4 +17,6 @@ Rails.application.routes.draw do
       get 'byday', on: :collection
     end
   end
+
+  resource :reservation, except: [:destroy]
 end

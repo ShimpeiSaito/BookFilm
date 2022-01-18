@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 2022_01_12_150500) do
     t.integer "member_id", null: false
     t.integer "schedule_id", null: false
     t.string "payment", null: false
-    t.integer "chiket_sheet"
+    t.integer "ticket_sheets"
     t.integer "total_sheets"
     t.datetime "confirm_time"
     t.integer "status", default: 0, null: false

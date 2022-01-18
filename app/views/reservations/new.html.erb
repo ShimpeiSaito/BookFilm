@@ -1,0 +1,39 @@
+<% @page_title = "チケット選択" %>
+
+<h1><%= @page_title %></h1>
+
+<%= form_tag("/reservation", method: :post) do %>
+  <table>
+    <thead>
+        <tr>
+            <th><%= label_tag :チケットの種類　　 %></th>
+            <th><%= label_tag :金額　　　 %></th>
+            <th><%= label_tag :枚数　　 %></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><%= @adu_amo.t_type %></td>
+            <td><%= @adu_amo.total %>円</td>
+            <td><%= number_field_tag("adu_sheets", 0, {min: 0, max: 50}) %></td>
+        </tr>
+        <tr>
+            <td><%= @mid_amo.t_type %></td>
+            <td><%= @mid_amo.total %>円</td>
+            <td><%= number_field_tag("mid_sheets", 0, {min: 0, max: 50}) %></td>
+        </tr>
+        <tr>
+            <td><%= @kid_amo.t_type %></td>
+            <td><%= @kid_amo.total %>円</td>
+            <td><%= number_field_tag("kid_sheets", 0, {min: 0, max: 50}) %></td>
+        </tr>
+        <tr>
+            <td><%= @inf_amo.t_type %></td>
+            <td><%= @inf_amo.total %>円</td>
+            <td><%= number_field_tag("inf_sheets", 0, {min: 0, max: 50}) %></td>
+        </tr>
+    </tbody>
+  </table>
+  <%= hidden_field_tag :scheid, @schedule.id %>
+  <%= submit_tag "座席の選択" %>
+<% end %>
