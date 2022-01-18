@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   end
 
   resource :reservation, except: [:destroy]
+  get '/reservation/step1/:id', to: 'reservations#step1'
 end

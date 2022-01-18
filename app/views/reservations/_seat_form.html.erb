@@ -1,0 +1,33 @@
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<div id="seat_form_app">
+  <p>※実際の配置とは多少異なる場合がございます。</p>
+  <table cellpadding="0px" cellspacing="0px">
+    <thead>
+      <tr>
+        <th></th>
+        <th class="screen-header" colspan="2"><h3>SCREEN {{ screen }}</h3></th>
+      </tr>
+      <tr>
+        <th></th>
+        <th>
+          <div class="nums-head" v-for="num in array(min, max)">{{ num }}</div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="(fromTo, row) in place">
+        <th class="rows-head">{{ row }}</th>
+        <td>
+          <div class="seat-box seat-reserved" v-for="num in array(1, max)" v-if="ifReserved(row, num)"></div>
+          <div class="seat-box seat-onsale" v-bind:class="selected[row + num] ? 'seat-selected':''" v-else-if="onSale(row, num)">
+            <span>
+              <label v-bind:for="'seat-' + row + num"></label>
+              <input type="checkbox" v-bind:name="'seats[' + row + num + ']'" v-bind:id="'seat-' + row + num" v-model="selected[row + num]" >
+            </span>
+          </div>
+          <div class="seat-box" v-else></div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

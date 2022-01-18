@@ -1,0 +1,56 @@
+#seat_form_app {
+  background-color: black;
+  color: white;
+  overflow: scroll;
+  * {
+    width: max-content;
+  }
+
+  .screen-header h3 {
+    margin: 30px auto;
+  }
+
+  .rows-head {
+    font-size: 14px;
+    width: 50px;
+  }
+  
+  .nums-head, .seat-box {
+    font-size: 14px;
+    display: inline-block;
+    margin: 5px 1px;
+    width: 25px;
+  }
+  
+  .seat-box label {
+    cursor: pointer;
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .seat-box input[type=checkbox] {
+    display: none;
+    margin: 0;
+  }
+  
+  .seat-onsale {
+    background-color: white;
+    border: 1px solid silver;
+    border-radius: 4px;
+    height: 35px;
+    width: 25px;
+  }
+  
+  .seat-selected {
+    background-color: rgb(255, 32, 64);
+  }
+  
+  .seat-reserved {
+    background-color: #2f2f2f;
+    border: 1px solid gray;
+    border-radius: 4px;
+    height: 35px;
+    width: 25px;
+  }
+}

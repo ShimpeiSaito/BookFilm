@@ -1,0 +1,34 @@
+<p>Step2. 座席を<%= @quantity.values.map(&:to_i).sum %>つ選択してください</p>
+
+<%
+  placement = Hash.new  # 配置データの取得
+  seat_total = 0  # データの総座席数をカウント
+  scrs = Screen.where("(theater_id = ?) and (screen_no = ?)", @reservation.sche.thea, @reservation.sche.screen_no)
+  for scr in scrs do
+    Seat.where(seat_group: scr.seat_group).each do |rel|  # モデルのコンパイル
+      unless placement[rel.row] then placement[rel.row] = [] end
+      placement[rel.row].push(rel.start_line); placement[rel.row].push(rel.last_line)
+      seat_total += rel.num
+    end
+    break
+  end
+
+  reserved = Array.new  # 予約済みの座席を取得
+  Reservationdetail.where(res: Reservation.where(sche: @reservation.sche).ids).each do |val|
+    unless val then reserved.push(val.seat) end
+  end
+%>
+<script>
+  let screen = "<%= @reservation.sche.screen_no %>"
+  let quantity = "<%= @quantity.values.map(&:to_i).sum %>"
+  let placement = '<%= placement.to_json.html_safe %>'
+  let reserved = '<%= reserved.to_json.html_safe %>'
+</script>
+
+<%= form_for @reservation, as: "reservation", url: "#", method: :post do |form| %>
+  <%= render "seat_form" %>
+  <div align=right>（残 <%= seat_total - reserved.length %>/<%= seat_total %> 席）</div>
+  <%= form.hidden_field :id %>
+
+  <div class="submit_button"><%= form.submit "次へ進む" %></div>
+<% end %>
