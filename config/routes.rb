@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root "top#index"
 
-  resources :members
+  resources :members, only: [:show, :create]
   resource :session, only: [:create, :destroy]
   resource :account, except: [:destroy]
   resource :password, only: [:show, :edit, :update]
@@ -10,5 +10,11 @@ Rails.application.routes.draw do
     get "search", on: :collection
   end
 
-  resources :theaters
+  resources :theaters, only: [:index, :show]
+
+  resources :theaters do
+    resources :schedules, only: [:show] do
+      get 'byday', on: :collection
+    end
+  end
 end

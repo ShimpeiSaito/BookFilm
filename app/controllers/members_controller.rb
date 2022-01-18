@@ -6,12 +6,6 @@ class MembersController < ApplicationController
     #@reservations = Reservation.find(@member.id)
   end
 
-  def new
-  end
-
-  def edit
-  end
-
   #会員の新規登録
   def create
     @member = Member.new(member_params)
@@ -20,11 +14,5 @@ class MembersController < ApplicationController
     else
         render "new"
     end
-  end
-
-  def update
-  end
-
-  def destroy
   end
 end
