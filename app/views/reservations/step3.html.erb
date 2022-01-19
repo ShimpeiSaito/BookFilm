@@ -2,5 +2,10 @@
 
 <h1><%= @page_title %></h1>
 
+<%= form_for @reservation, as: "reservation" do |form| %>
+    <%= render "body2" %>
+    
+    <%= form.hidden_field :id %>
 
-<%= render "body2" %>
+    <div class="submit_button"><%= form.submit "予約確定" %></div>
+<% end %>

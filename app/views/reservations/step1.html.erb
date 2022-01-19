@@ -15,7 +15,7 @@
 
   reserved = Array.new  # 予約済みの座席を取得
   Reservationdetail.where(res: Reservation.where(sche: @reservation.sche).ids).each do |val|
-    unless val then reserved.push(val.seat) end
+    if val then reserved.push(val.seat) end
   end
 %>
 <script>
