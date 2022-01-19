@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 2022_01_12_150500) do
 
   create_table "seats", force: :cascade do |t|
     t.integer "seat_group", null: false
-    t.integer "row", null: false
+    t.string "row", null: false
     t.integer "start_line", null: false
     t.integer "last_line", null: false
     t.integer "num", null: false

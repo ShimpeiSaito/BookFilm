@@ -9,7 +9,7 @@ class ReservationsController < ApplicationController
     @inf_amo = Ticket.find(4)
   end
 
-  def create
+  def step1
     schedule = Schedule.find(params[:scheid])
     sheets = params[:adu_sheets].to_i + params[:mid_sheets].to_i + params[:kid_sheets].to_i + params[:inf_sheets].to_i
     adu = Ticket.find(1)
@@ -48,29 +48,45 @@ class ReservationsController < ApplicationController
           @reservationdetail.save
         end
       end
-      redirect_to action: :step1,id:@reservation.id
     else
       redirect_to :root, notice: "エラーが発生しました。"
     end
-  end
-
-  def step1
-    @reservation = Reservation.find(params[:id])
-    adu_amo = Reservationdetail.where("(reservation_id = ?) and (ticket_id = ?)", @reservation.id, 1).count
-    mid_amo = Reservationdetail.where("(reservation_id = ?) and (ticket_id = ?)", @reservation.id, 2).count
-    kid_amo = Reservationdetail.where("(reservation_id = ?) and (ticket_id = ?)", @reservation.id, 3).count
-    inf_amo = Reservationdetail.where("(reservation_id = ?) and (ticket_id = ?)", @reservation.id, 4).count
 
     @quantity = {adu: adu_amo, mid: mid_amo, kid: kid_amo, inf: inf_amo}
   end
 
   def step2
     @reservation = Reservation.find(params[:reservation][:id])
-    @member = current_member
+    @reservationdetails = Reservationdetail.where(res: params[:reservation][:id])
+
+    seat_amo =  params[:seats].keys.size
+    seats = params[:seats].keys
+    idx = 0
+    for resd in @reservationdetails do
+      if seat_amo > 0 then
+        resd.seat = seats[idx]
+        resd.save
+      end
+      seat_amo -= 1
+      idx += 1
+    end
+    @member = Member.find(@reservation.mem.id)
   end
 
   def step3
     @reservation = Reservation.find(params[:reservation][:id])
-    @member = current_member
+    @member = Member.find(@reservation.mem.id)
+    @schedule = Schedule.find(@reservation.sche.id)
+    @movie = Movie.find(@reservation.sche.mov.id)
+    @theater = Theater.find(@reservation.sche.thea.id)
+    @adu = Ticket.find(1)
+    @mid = Ticket.find(2)
+    @kid = Ticket.find(3)
+    @inf = Ticket.find(4)
+    @adu_amo = Reservationdetail.where("(reservation_id = ?) and (ticket_id = ?)", @reservation.id, "1").count
+    @mid_amo = Reservationdetail.where("(reservation_id = ?) and (ticket_id = ?)", @reservation.id, "2").count
+    @kid_amo = Reservationdetail.where("(reservation_id = ?) and (ticket_id = ?)", @reservation.id, "3").count
+    @inf_amo = Reservationdetail.where("(reservation_id = ?) and (ticket_id = ?)", @reservation.id, "4").count
+    @reservationdetails = Reservationdetail.where(res: @reservation.id)
   end
 end
