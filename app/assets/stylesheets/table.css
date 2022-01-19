@@ -13,14 +13,18 @@ table.list, table.attr {
   table.list td, table.list th,
   table.attr td, table.attr th {
     padding: 4px;
+    border-width: 1px 1px; 
+    border-color: #fff;  
+    border-style: solid;   /* 線種：実線 */
+    padding: 0.3em;        /* セル内側の余白 */
   }
   
   table.list th {
-    text-align: left;
+    text-align: center;
   }
   
   table.attr th {
-    text-align: right;
+    text-align: center;
   }
   
   table.list td, table.attr td {

@@ -3,6 +3,7 @@ class AccountsController < ApplicationController
 
   def show
     @member = current_member
+    @reservations = Reservation.where(mem: @member)
   end
 
   def edit

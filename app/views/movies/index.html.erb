@@ -21,7 +21,7 @@
             <% @movies.each do |movie| %>
                 <tr>
                     <td><%= link_to movie.title, movie_path(movie.id) %></td>
-                    <td><%= movie.explanation %></td>
+                    <td><%= movie.explanation.truncate(30) %></td>
                 </tr>
             <% end %>
         </tbody>
