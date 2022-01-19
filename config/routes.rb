@@ -20,4 +20,6 @@ Rails.application.routes.draw do
 
   resource :reservation, except: [:destroy]
   get '/reservation/step1/:id', to: 'reservations#step1'
+  post '/reservation/step2', to: 'reservations#step2'
+  post '/reservation/step3', to: 'reservations#step3'
 end

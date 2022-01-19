@@ -1,11 +1,18 @@
 1.upto(5) do |gp|
-    1.upto(rand(15..20)) do |idx|
+    row = rand(15..20)
+    1.upto(row) do |idx|
         if idx <= 3 then
             start = 3
             last = 22
+        elsif idx <= 7 then
+            start = 2
+            last = 23
+        elsif (row - 3) < idx then
+            start = 1
+            last = 25 - 3
         else
-            start = rand(1..2)
-            last = rand(23..25)
+            start = 1
+            last = 25
         end
         Seat.create(
             seat_group: gp,

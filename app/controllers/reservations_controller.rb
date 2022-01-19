@@ -22,7 +22,7 @@ class ReservationsController < ApplicationController
     inf_amo = params[:inf_sheets].to_i
 
     totalamount = adu.total * adu_amo + mid.total * mid_amo + kid.total * kid_amo + inf.total * inf_amo
-    @reservation = Reservation.new(mem: current_member, sche: schedule, payment: current_member.payment, ticket_sheets: sheets, total_sheets: totalamount)
+    @reservation = Reservation.new(mem: current_member, sche: schedule, payment: current_member.payment, ticket_sheets: sheets, total_sheets: totalamount, status: 0)
     if @reservation.save
       if adu_amo > 0
         adu_amo.times do
@@ -62,5 +62,15 @@ class ReservationsController < ApplicationController
     inf_amo = Reservationdetail.where("(reservation_id = ?) and (ticket_id = ?)", @reservation.id, 4).count
 
     @quantity = {adu: adu_amo, mid: mid_amo, kid: kid_amo, inf: inf_amo}
+  end
+
+  def step2
+    @reservation = Reservation.find(params[:reservation][:id])
+    @member = current_member
+  end
+
+  def step3
+    @reservation = Reservation.find(params[:reservation][:id])
+    @member = current_member
   end
 end

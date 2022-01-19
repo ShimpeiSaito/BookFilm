@@ -25,7 +25,7 @@
   let reserved = '<%= reserved.to_json.html_safe %>'
 </script>
 
-<%= form_for @reservation, as: "reservation", url: "#", method: :post do |form| %>
+<%= form_for @reservation, as: "reservation", url: :reservation_step2, method: :post do |form| %>
   <%= render "seat_form" %>
   <div align=right>（残 <%= seat_total - reserved.length %>/<%= seat_total %> 席）</div>
   <%= form.hidden_field :id %>

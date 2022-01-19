@@ -1,13 +1,13 @@
 class MoviesController < ApplicationController
   # 作品一覧
   def index
-      @movies = Movie.order(:title)
+      @movies = Movie.where("released_at < ? and expired_at > ?", Date.today, Date.today).order(:title)
           .page(params[:page]).per(15)
   end
 
   # 作品検索
   def search
-      @movies = Movie.search(params[:q], params[:m], params[:w])
+      @movies = Movie.where("released_at < ? and expired_at > ?", Date.today, Date.today).search(params[:q], params[:m], params[:w])
           .page(params[:page]).per(15)
       render "index"
   end

@@ -1,0 +1,36 @@
+<%= form_for @reservation, as: "reservation", url: :reservation_step3, method: :post do |form| %>
+    <table class="attr">
+        <tr>
+            <th width="150">氏名</th>
+            <td><%= @member.name %></td>
+        </tr>
+        <tr>
+            <th width="150">生年月日</th>
+            <td><%= @member.birthday&.strftime("%Y年%m月%d日") %></td>
+        </tr>
+        <tr>
+            <th width="150">電話番号</th>
+            <td><%= @member.tel %></td>
+        </tr>
+        <tr>
+            <th width="150">メールアドレス</th>
+            <td><%= @member.email %></td>
+        </tr>
+        <tr>
+            <th width="150">クレジット情報</th>
+            <td><%= @member.payment %></td>
+        </tr>
+        <tr>
+            <th width="150">セキュリティコード</th>
+            <td>
+                <input type="text" id="cvc" name="cvc" required
+                    minlength="3" maxlength="4" size="10">
+            </td>
+        </tr>
+    </table>
+
+    <%= form.hidden_field :id %>
+
+    <div class="submit_button"><%= form.submit "次へ進む" %></div>
+<% end %>
+
