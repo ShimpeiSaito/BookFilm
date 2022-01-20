@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::Base
     private def current_member
-        Member.find_by(id: cookies.signed[:member_id]) if cookies.signed[:member_id]  #セッションデータ:member_idに値があればMemberオブジェクトを、なければnilを返す。
+        if cookies.signed[:member_id]
+            Member.find_by(id: cookies.signed[:member_id])   #セッションデータ:member_idに値があればMemberオブジェクトを、なければnilを返す。
+        elsif cookies.signed[:admin_id]
+            Admin.find_by(id: cookies.signed[:admin_id])
+        end
     end
     helper_method :current_member
 

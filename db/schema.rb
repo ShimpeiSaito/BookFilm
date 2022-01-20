@@ -14,13 +14,13 @@ ActiveRecord::Schema.define(version: 2022_01_12_150500) do
 
   create_table "admins", force: :cascade do |t|
     t.string "login_id", null: false
-    t.string "password", null: false
     t.string "name", null: false
     t.date "birthday", null: false
-    t.date "tel", null: false
+    t.string "tel", null: false
     t.string "email", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "password_digest"
   end
 
   create_table "members", force: :cascade do |t|
