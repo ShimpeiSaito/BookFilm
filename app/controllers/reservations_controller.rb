@@ -77,21 +77,26 @@ class ReservationsController < ApplicationController
   end
 
   def step2
-    @reservation = Reservation.find(params[:reservation][:id])
-    @reservationdetails = Reservationdetail.where(res: params[:reservation][:id])
+    resds = Reservationdetail.where(res: params[:reservation][:id]).count
+    unless params[:seats].nil? || params[:seats].keys.size < resds
+      @reservation = Reservation.find(params[:reservation][:id])
+      @reservationdetails = Reservationdetail.where(res: params[:reservation][:id])
 
-    seat_amo =  params[:seats].keys.size
-    seats = params[:seats].keys
-    idx = 0
-    for resd in @reservationdetails do
-      if seat_amo > 0 then
-        resd.seat = seats[idx]
-        resd.save
+      seat_amo =  params[:seats].keys.size
+      seats = params[:seats].keys
+      idx = 0
+      for resd in @reservationdetails do
+        if seat_amo > 0 then
+          resd.seat = seats[idx]
+          resd.save
+        end
+        seat_amo -= 1
+        idx += 1
       end
-      seat_amo -= 1
-      idx += 1
+      @member = Member.find(@reservation.mem.id)
+    else
+      redirect_to :root, notice: "エラーが発生しました。申し訳ございませんが最初からやり直してください。"
     end
-    @member = Member.find(@reservation.mem.id)
   end
 
   def step3

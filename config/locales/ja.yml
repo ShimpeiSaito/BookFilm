@@ -1,0 +1,19 @@
+ja:
+  activerecord:
+    models:
+      member: 会員情報
+    attributes:
+      member:
+        login_id: ログインID
+        name: 氏名
+        birthday: 誕生日
+        email: メールアドレス
+        tel: 電話番号
+        payment: クレジットカード番号
+        current_password: 現在のパスワード
+        password: 新しいパスワード
+        password_confirmation: 新しいパスワードの確認
+    errors:
+      messages:
+        wrong: が正しくありません。
+        invalid_new_duty_ids: が重複しています。

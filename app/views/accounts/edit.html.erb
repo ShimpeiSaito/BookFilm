@@ -6,5 +6,5 @@
 
 <%= form_for @member, as: "account", url: :account do |form| %>
     <%= render "shared/member_form", form: form %>
-    <div><%= form.submit %></div>
+    <div class="submit_button"><%= form.submit "更新" %></div>
 <% end %>
