@@ -11,31 +11,35 @@
 
 <br>
 <h5>予約履歴</h5>
-<% @reservations.each do |reserve| %>
-    <table class="attr">
-        <tr>
-            <th width="150">劇場名</th>
-            <td><%= reserve.sche.thea.store_name %></td>
-        </tr>
-        <tr>
-            <th width="150">作品名</th>
-            <td><%= reserve.sche.mov.title %></td>
-        </tr>
-        <tr>
-            <th width="150">上映日</th>
-            <td><%= reserve.sche.screening_date.strftime("%Y/%m/%d") %></td>
-        </tr>
-        <tr>
-            <th width="150">上映開始時間</th>
-            <td><%= reserve.sche.starttime.strftime('%H:%M') %></td>
-        </tr>
-        <tr>
-            <th width="150">チケット枚数</th>
-            <td><%= reserve.ticket_sheets %>枚</td>
-        </tr>
-        <tr>
-            <th width="150">合計金額</th>
-            <td><%= reserve.total_sheets %>円</td>
-        </tr>
-    </table>
+<% if @reservations.present? %>
+    <% @reservations.each do |reserve| %>
+        <table class="attr">
+            <tr>
+                <th width="150">劇場名</th>
+                <td><%= reserve.sche.thea.store_name %></td>
+            </tr>
+            <tr>
+                <th width="150">作品名</th>
+                <td><%= reserve.sche.mov.title %></td>
+            </tr>
+            <tr>
+                <th width="150">上映日</th>
+                <td><%= reserve.sche.screening_date.strftime("%Y/%m/%d") %></td>
+            </tr>
+            <tr>
+                <th width="150">上映開始時間</th>
+                <td><%= reserve.sche.starttime.strftime('%H:%M') %></td>
+            </tr>
+            <tr>
+                <th width="150">チケット枚数</th>
+                <td><%= reserve.ticket_sheets %>枚</td>
+            </tr>
+            <tr>
+                <th width="150">合計金額</th>
+                <td><%= reserve.total_sheets %>円</td>
+            </tr>
+        </table>
+    <% end %>
+<% else %>
+    <p>予約履歴はありません。</p>
 <% end %>

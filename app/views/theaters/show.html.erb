@@ -8,6 +8,7 @@
             <tr>
                 <th>タイトル</th>
                 <th>作品概要</th>
+                <th>上映選択</th>
             </tr>
         </thead>
         <tbody>
@@ -15,6 +16,7 @@
                 <tr>
                     <td><%= link_to movie.title, movie_path(movie.id) %></td>
                     <td><%= movie.explanation.truncate(30) %></td>
+                    <td><%= link_to "上映選択", theater_schedule_path(theater_id: @theater.id,id: movie.id) %></td>
                 </tr>
             <% end %>
         </tbody>

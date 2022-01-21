@@ -11,7 +11,7 @@ class TheatersController < ApplicationController
     for schedule in @schedules do
       @mov_id.push(schedule.mov)
     end
-    @movies = Movie.where(id: @mov_id).order(:title)
+    @movies = Movie.where(id: @mov_id).where("released_at < ? and expired_at > ?", Date.today, Date.today).order(:title)
         .page(params[:page]).per(15)
   end
 end
