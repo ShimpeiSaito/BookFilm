@@ -20,6 +20,6 @@ class Member < ApplicationRecord
                 errors.add(:birthday, 'は今日を含む過去の日付を入力してください。') if birthday > Date.today
             end
         end
-    validates :email, presence: { message: "を入力してください" }, format: {  with: /\A^\S+@\S+\.\S+$\z/, allow_blank: true, message: "メールアドレスは不正な値です。" }
-    validates :payment, presence: { message: "を入力してください" }, format: {  with: /\A[0-9- ]+\z/, allow_blank: true, message: "クレジットカード番号は不正な値です。" }
+    validates :email, presence: { message: "を入力してください" }, format: {  with: /\A^\S+@\S+\.\S+$\z/, allow_blank: true, message: "は不正な値です。" }
+    validates :payment, presence: { message: "を入力してください" }, format: {  with: /\A[0-9- ]+\z/, allow_blank: true, message: "は不正な値です。" }
 end

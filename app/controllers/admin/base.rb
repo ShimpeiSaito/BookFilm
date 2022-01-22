@@ -12,6 +12,7 @@ class Admin::Base < ApplicationController
     private def admin_login_required
       if current_member
         if current_member&.class.name != "Admin"
+            cookies.delete(:member_id)
             raise LoginRequired
         end
       else
@@ -46,4 +47,4 @@ class Admin::Base < ApplicationController
         render "admin/errors/internal_server_error", status: 500, layout: "error",
             formats: [:html]
     end
-  end  
+end  

@@ -9,7 +9,7 @@ class MoviesController < ApplicationController
 
   # 作品検索
   def search
-      @movies = Movie.where("released_at < ? and expired_at > ?", Date.today, Date.today).search(params[:q], params[:m], params[:w])
+      @movies = Movie.where("released_at < ? and expired_at > ?", Date.today, Date.today).search(params[:q])
           .page(params[:page]).per(15)
       render "index"
   end

@@ -3,7 +3,7 @@ class Admin::AdminsessionsController < Admin::Base
         admin = Admin.find_by(login_id: params[:name])
         if admin&.authenticate(params[:password])
             cookies.signed[:admin_id] = { value: admin.id, expires: 30.minutes.from_now } #10.seconds.from_now
-            redirect_to admin_admin_path(admin.id)
+            redirect_to admin_admins_path
         else
             flash.alert = "名前とパスワードが一致しません"
             redirect_back_or(admin_root_path)

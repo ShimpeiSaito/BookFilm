@@ -1,0 +1,36 @@
+<%= render "shared/errors", obj: @movie %>
+
+<table class="attr">
+  <tr>
+    <th width="200"><%= form.label :title %></th>
+    <td><%= form.text_field :title, size: 60 %></td>
+  </tr>
+  <tr>
+    <th><%= form.label :explanation %></th>
+    <td><%= form.text_area :explanation, rows: 10, cols: 60 %></td>
+  </tr>
+  <tr>
+    <th><%= form.label :released_at %></th>
+    <td><%= form.date_select :released_at,
+              start_year: Time.current.year - 10, end_year: Time.current.year + 10,
+              use_month_numbers: true %></td>
+  </tr>
+  <tr>
+    <th><%= form.label :expired_at %></th>
+    <td><%= form.date_select :expired_at,
+              start_year: Time.current.year, end_year: Time.current.year + 10,
+              use_month_numbers: true %></td>
+  </tr>
+  <tr>
+    <th><%= form.label :screening_time %></th>
+    <td><%= form.number_field :screening_time, {min: 1, max: 500} %>分</td>
+  </tr>
+  <tr>
+    <th width="80"><%= form.label :distribution %></th>
+    <td><%= form.text_field :distribution, size: 60 %></td>
+  </tr>
+  <tr>
+    <th width="80"><%= form.label :director %></th>
+    <td><%= form.text_field :director, size: 60 %></td>
+  </tr>
+</table>

@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   namespace :admin do
     root "top#index"
     resource :adminsession, only: [:create, :destroy]
-    resources :admins, except: [:destroy]
+    resource :admins, except: [:destroy]
+    resources :movies do
+      get "search", on: :collection
+    end
   end
 
   resources :members, only: [:show, :create]

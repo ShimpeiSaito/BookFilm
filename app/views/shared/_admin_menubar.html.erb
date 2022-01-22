@@ -1,8 +1,8 @@
 <nav class="menubar" id="admin-menubar">
   <ul>
     <%= menu_link_to "管理ログイン", :admin_root unless current_member %>
-    <%= menu_link_to "A", "#" %>
-    <%= menu_link_to "B", "#" %>
+    <%= menu_link_to "管理者マイページ／メニュー", admin_admins_path %>
+    <%= menu_link_to "作品編集", admin_movies_path %>
     <%= menu_link_to "C", "#" %>
   </ul>
 </nav>

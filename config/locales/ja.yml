@@ -2,6 +2,7 @@ ja:
   activerecord:
     models:
       member: 会員情報
+      movie: 作品
     attributes:
       member:
         login_id: ログインID
@@ -13,6 +14,14 @@ ja:
         current_password: 現在のパスワード
         password: 新しいパスワード
         password_confirmation: 新しいパスワードの確認
+      movie:
+        title: 作品タイトル
+        explanation: 作品概要
+        released_at: 公開開始日
+        expired_at: 公開終了日
+        screening_time: 上映時間
+        distribution: 配給
+        director: 監督
     errors:
       messages:
         wrong: が正しくありません。
