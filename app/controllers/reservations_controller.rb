@@ -1,6 +1,16 @@
 class ReservationsController < ApplicationController
   before_action :login_required
 
+  before_action only: [:new] do
+    schedule = Schedule.find(params[:scheid])
+    allres = Reservation.where(sche: schedule.id).where("status = ? and confirm_time < ?", 0, Time.now - 30 * 60)
+    if allres.nil? == false then
+      for kilres in allres do
+        kilres.destroy
+      end
+    end
+  end
+
   def new
     @schedule = Schedule.find(params[:scheid])
     @adu_amo = Ticket.find(1)
@@ -29,7 +39,7 @@ class ReservationsController < ApplicationController
     end
     
     if flag == false then
-      @reservation.confirm_time = (Time.zone.now + 18*60*60).to_s(:db)
+      @reservation.confirm_time = (Time.zone.now + 9 * 60 * 60).to_s(:db)
       @reservation.status = 1
       if @reservation.save
         @member = Member.find(@reservation.mem.id)
@@ -45,6 +55,8 @@ class ReservationsController < ApplicationController
         @kid_amo = Reservationdetail.where("(reservation_id = ?) and (ticket_id = ?)", @reservation.id, "3").count
         @inf_amo = Reservationdetail.where("(reservation_id = ?) and (ticket_id = ?)", @reservation.id, "4").count
         @reservationdetails = Reservationdetail.where(res: @reservation.id)
+      else
+        redirect_to :root, notice: "エラーが発生しました。申し訳ございませんが最初からやり直してください。"
       end
     else
       redirect_to new_reservation_path(scheid: @reservation.sche.id), notice: "エラーが発生しました。申し訳ございませんがチケットの枚数を指定して、再度座席を選択してください。"
@@ -69,6 +81,7 @@ class ReservationsController < ApplicationController
   
       totalamount = adu.total * adu_amo + mid.total * mid_amo + kid.total * kid_amo + inf.total * inf_amo
       @reservation = Reservation.new(mem: current_member, sche: schedule, payment: current_member.payment, ticket_sheets: sheets, total_sheets: totalamount, status: 0)
+      @reservation.confirm_time = (Time.zone.now + 9 * 60 * 60).to_s(:db)
       if @reservation.save
         if adu_amo > 0
           adu_amo.times do
@@ -94,6 +107,7 @@ class ReservationsController < ApplicationController
             @reservationdetail.save
           end
         end
+        @reservation.confirm_time = (Time.zone.now + 9 * 60 * 60).to_s(:db)
       else
         redirect_to :root, notice: "エラーが発生しました。申し訳ございませんが最初からやり直してください。"
       end
@@ -107,19 +121,24 @@ class ReservationsController < ApplicationController
     unless params[:seats].nil? || params[:seats].keys.size < resds
       @reservation = Reservation.find(params[:reservation][:id])
       @reservationdetails = Reservationdetail.where(res: params[:reservation][:id])
+      @reservation.confirm_time = (Time.zone.now + 9 * 60 * 60).to_s(:db)
 
-      seat_amo =  params[:seats].keys.size
-      seats = params[:seats].keys
-      idx = 0
-      for resd in @reservationdetails do
-        if seat_amo > 0 then
-          resd.seat = seats[idx]
-          resd.save
+      if @reservation.save then
+        seat_amo =  params[:seats].keys.size
+        seats = params[:seats].keys
+        idx = 0
+        for resd in @reservationdetails do
+          if seat_amo > 0 then
+            resd.seat = seats[idx]
+            resd.save
+          end
+          seat_amo -= 1
+          idx += 1
         end
-        seat_amo -= 1
-        idx += 1
+        @member = Member.find(@reservation.mem.id)
+      else
+        redirect_to :root, notice: "エラーが発生しました。申し訳ございませんが最初からやり直してください。"
       end
-      @member = Member.find(@reservation.mem.id)
     else
       @reservation = Reservation.find(params[:reservation][:id])
       redirect_to new_reservation_path(scheid: @reservation.sche.id), notice: "チケットの枚数を指定して、再度座席を選択してください。"
@@ -127,19 +146,24 @@ class ReservationsController < ApplicationController
   end
 
   def step3
-    @reservation = Reservation.find(params[:reservation][:id])
-    @member = Member.find(@reservation.mem.id)
-    @schedule = Schedule.find(@reservation.sche.id)
-    @movie = Movie.find(@reservation.sche.mov.id)
-    @theater = Theater.find(@reservation.sche.thea.id)
-    @adu = Ticket.find(1)
-    @mid = Ticket.find(2)
-    @kid = Ticket.find(3)
-    @inf = Ticket.find(4)
-    @adu_amo = Reservationdetail.where("(reservation_id = ?) and (ticket_id = ?)", @reservation.id, "1").count
-    @mid_amo = Reservationdetail.where("(reservation_id = ?) and (ticket_id = ?)", @reservation.id, "2").count
-    @kid_amo = Reservationdetail.where("(reservation_id = ?) and (ticket_id = ?)", @reservation.id, "3").count
-    @inf_amo = Reservationdetail.where("(reservation_id = ?) and (ticket_id = ?)", @reservation.id, "4").count
-    @reservationdetails = Reservationdetail.where(res: @reservation.id)
+      @reservation = Reservation.find(params[:reservation][:id])
+      @reservation.confirm_time = (Time.zone.now + 9 * 60 * 60).to_s(:db)
+    if @reservation.save then
+      @member = Member.find(@reservation.mem.id)
+      @schedule = Schedule.find(@reservation.sche.id)
+      @movie = Movie.find(@reservation.sche.mov.id)
+      @theater = Theater.find(@reservation.sche.thea.id)
+      @adu = Ticket.find(1)
+      @mid = Ticket.find(2)
+      @kid = Ticket.find(3)
+      @inf = Ticket.find(4)
+      @adu_amo = Reservationdetail.where("(reservation_id = ?) and (ticket_id = ?)", @reservation.id, "1").count
+      @mid_amo = Reservationdetail.where("(reservation_id = ?) and (ticket_id = ?)", @reservation.id, "2").count
+      @kid_amo = Reservationdetail.where("(reservation_id = ?) and (ticket_id = ?)", @reservation.id, "3").count
+      @inf_amo = Reservationdetail.where("(reservation_id = ?) and (ticket_id = ?)", @reservation.id, "4").count
+      @reservationdetails = Reservationdetail.where(res: @reservation.id)
+    else
+      redirect_to :root, notice: "エラーが発生しました。申し訳ございませんが最初からやり直してください。"
+    end
   end
 end
