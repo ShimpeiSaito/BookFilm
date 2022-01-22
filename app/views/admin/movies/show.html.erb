@@ -1,6 +1,10 @@
 <% @page_title = @movie.title %>
 <h1><%= @page_title %></h1>
 
+<div class="toolbar">
+    <%= link_to "作品情報の編集", edit_admin_movie_path %>
+</div>
+
 <table class="attr">
   <tr>
     <th>作品ID</th>

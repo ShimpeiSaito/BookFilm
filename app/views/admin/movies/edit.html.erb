@@ -1,7 +1,7 @@
-<% @page_title = "作品の編集" %>
+<% @page_title = "作品情報の編集" %>
 <h1><%= @page_title %></h1>
 
-<%= form_for @movie do |form| %>
+<%= form_for [:admin, @movie] do |form| %>
   <%= render "form", form: form %>
   <div><%= form.submit "編集反映" %></div>
 <% end %>

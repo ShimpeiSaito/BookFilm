@@ -29,14 +29,18 @@ class Admin::MoviesController < Admin::Base
     end
   end
 
-  def destroy
-  end
-
   def edit
     @movie = Movie.find(params[:id])
   end
 
   def update
+    @movie = Movie.find(params[:id])
+    @movie.assign_attributes(movie_params)
+    if @movie.save
+      redirect_to [:admin, @movie], notice: "作品情報を更新しました。"
+    else
+      render "edit"
+    end
   end
 
   # ストロング・パラメータ
