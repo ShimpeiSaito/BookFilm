@@ -5,14 +5,23 @@
     <span class="subject">B</span>ook <span class="subject">F</span>ilm
 </div>
 
-<% if current_member %>
-    <ul class="account-menu">
-        <%= menu_link_to current_member.name + "さん", :account %>
-        <%= menu_link_to "ログアウト", :session,
-                method: :delete, data: { confirm: "ログアウトしますか？" } %>
-    </ul>
-<% end %>
 
-<%=
-    render "shared/menubar"
-%>
+<% if controller.kind_of?(Admin::Base) %>
+    <% if current_member %>
+        <ul class="account-menu">
+            <%= menu_link_to current_member.name + "さん", admin_admin_path(current_member.id) %>
+            <%= menu_link_to "ログアウト", admin_adminsession_path,
+                    method: :delete, data: { confirm: "ログアウトしますか？" } %>
+        </ul>
+    <% end %>
+    <%= render "shared/admin_menubar" %>
+<% else %>
+    <% if current_member %>
+        <ul class="account-menu">
+            <%= menu_link_to current_member.name + "さん", :account %>
+            <%= menu_link_to "ログアウト", :session,
+                    method: :delete, data: { confirm: "ログアウトしますか？" } %>
+        </ul>
+    <% end %>
+    <%= render "shared/menubar" %>
+<% end %>

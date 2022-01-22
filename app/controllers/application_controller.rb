@@ -14,6 +14,12 @@ class ApplicationController < ActionController::Base
     private def login_required
         raise LoginRequired unless current_member
     end
+    
+    private def admin_logout
+        if current_member.class.name == "Admin"
+            redirect_to admin_root_path
+        end
+    end
 
     if Rails.env.production? || ENV["RESCUE_EXCEPTIONS"]
         rescue_from StandardError, with: :rescue_internal_server_error

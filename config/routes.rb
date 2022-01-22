@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
   root "top#index"
 
+  namespace :admin do
+    root "top#index"
+    resource :adminsession, only: [:create, :destroy]
+    resources :admins, except: [:destroy]
+  end
+
   resources :members, only: [:show, :create]
   resource :session, only: [:create, :destroy]
   resource :account, except: [:destroy]

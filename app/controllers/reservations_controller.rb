@@ -1,4 +1,5 @@
 class ReservationsController < ApplicationController
+  before_action :admin_logout
   before_action :login_required
 
   before_action only: [:new] do

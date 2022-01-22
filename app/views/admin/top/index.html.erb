@@ -1,0 +1,10 @@
+<% @page_title = "管理ログインページ" %>
+
+<h1><%= @page_title %></h1>
+
+<% unless current_member %>
+    <%= render "admin/top/login_form" %>
+<% else %>
+    <p>すでにログインしています。</p>
+    <p>ユーザページに移動する場合は、管理者アカウントからログアウトしてください。</p>
+<% end %>

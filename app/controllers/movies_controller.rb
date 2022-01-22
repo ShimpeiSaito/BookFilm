@@ -1,4 +1,6 @@
 class MoviesController < ApplicationController
+  before_action :admin_logout
+
   # 作品一覧
   def index
       @movies = Movie.where("released_at < ? and expired_at > ?", Date.today, Date.today).order(:title)

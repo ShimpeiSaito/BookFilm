@@ -1,1 +1,3 @@
-<%= render "shared/login_form" unless current_member %>
+<% unless controller.kind_of?(Admin::Base) %>
+    <%= render "shared/login_form" unless current_member %>
+<% end %>

@@ -1,4 +1,6 @@
 class TheatersController < ApplicationController
+  before_action :admin_logout
+
   def index
     @theaters = Theater.order(:store_name)
         .page(params[:page]).per(5)

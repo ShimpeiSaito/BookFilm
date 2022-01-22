@@ -1,4 +1,6 @@
 class SchedulesController < ApplicationController
+  before_action :admin_logout
+
   def show
     @movie = Movie.find(params[:id])
     @theater = Theater.find(params[:theater_id])

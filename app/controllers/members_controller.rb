@@ -1,4 +1,5 @@
 class MembersController < ApplicationController
+  before_action :admin_logout
   before_action :login_required
 
   def show
