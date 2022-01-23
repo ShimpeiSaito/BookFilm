@@ -9,6 +9,11 @@ Rails.application.routes.draw do
       get "search", on: :collection
     end
     resources :schedules
+    resources :reservations do
+      get "search", on: :collection
+      get "updtime", on: :collection
+      get "confirm", on: :collection
+    end
   end
 
   resources :members, only: [:show, :create]

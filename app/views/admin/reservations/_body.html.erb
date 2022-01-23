@@ -1,0 +1,40 @@
+<% if @reservations.present? %>
+    ※最新の更新時間順
+    <table class="list">
+        <thead>
+            <tr>
+                <th>会員名</th>
+                <th>劇場名</th>
+                <th>作品名</th>
+                <th>上映日</th>
+                <th>購入枚数</th>
+                <th>更新時間</th>
+                <th>予約状態</th>
+                <th>予約詳細</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @reservations.each do |res| %>
+                <tr>
+                    <td><%= res.mem.name %></td>
+                    <td><%= res.sche.thea.store_name %></td>
+                    <td><%= res.sche.mov.title %></td>
+                    <td><%= res.sche.screening_date.strftime("%Y/%m/%d") %></td>
+                    <td><%= res.ticket_sheets %>枚</td>
+                    <td><%= res.confirm_time.strftime('%H:%M') %></td>
+                    <td>
+                        <% if res.status == 1 then %>
+                            予約完了
+                        <% else %>
+                            予約中
+                        <% end %>
+                    </td>
+                    <td><%= link_to "予約詳細", admin_reservation_path(res.id) %></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <%= paginate @reservations %>
+<% else %>
+    <p>予約がありません。</p>
+<% end %>

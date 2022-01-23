@@ -1,0 +1,78 @@
+<table class="attr">
+    <tr>
+        <th width="150">氏名</th>
+        <td><%= @member.name %></td>
+    </tr>
+    <tr>
+        <th width="150">電話番号</th>
+        <td><%= @member.tel %></td>
+    </tr>
+    <tr>
+        <th width="150">メールアドレス</th>
+        <td><%= @member.email %></td>
+    </tr>
+    <tr>
+        <th width="150">劇場名</th>
+        <td><%= @theater.store_name %></td>
+    </tr>
+    <tr>
+        <th width="150">作品名</th>
+        <td><%= @movie.title %></td>
+    </tr>
+    <tr>
+        <th width="150">上映日</th>
+        <td><%= @schedule.screening_date.strftime("%Y/%m/%d") %></td>
+    </tr>
+    <tr>
+        <th width="150">上映開始時間</th>
+        <td><%= @schedule.starttime.strftime('%H:%M') %></td>
+    </tr>
+    <tr>
+        <th width="150">座席</th>
+        <td>
+            <% @reservationdetails.each do |resd| %>
+                <%= resd.seat + " " %>
+            <% end %>
+        </td>
+    </tr>
+    <tr>
+        <th width="150">チケット</th>
+        <td>
+            <% if @adu_amo > 0 %>
+                <% subtotal = @adu_amo * @adu.total %>
+                <%= @adu.t_type + "（" + @adu_amo.to_s + "枚）¥" + subtotal.to_s + "　" %>
+            <% end %>
+            <% if @mid_amo > 0 %>
+                <% subtotal = @mid_amo * @mid.total %>
+                <%= @mid.t_type + "（" + @mid_amo.to_s + "枚）¥" + subtotal.to_s + "　" %>
+            <% end %>
+            <% if @kid_amo > 0 %>
+                <% subtotal = @kid_amo * @kid.total %>
+                <%= @kid.t_type + "（" + @kid_amo.to_s + "枚）¥" + subtotal.to_s + "　" %>
+            <% end %>
+            <% if @inf_amo > 0 %>
+                <% subtotal = @inf_amo * @inf.total %>
+                <%= @inf.t_type + "（" + @inf_amo.to_s + "枚）¥" + subtotal.to_s + "　" %>
+            <% end %>
+        </td>
+    </tr>
+    <tr>
+        <th width="150">合計金額(税込)</th>
+        <td><%= @reservation.total_sheets.to_s + "円" %></td>
+    </tr>
+    <tr>
+        <th width="150">更新時間</th>
+        <td><%= @reservation.confirm_time.strftime('%H:%M') %></td>
+    </tr>
+    <tr>
+        <th width="150">予約状態</th>
+        <td>
+            <% if @reservation.status == 1 then %>
+                予約完了
+            <% else %>
+                予約中
+            <% end %>
+        </td>
+    </tr>
+</table>
+
