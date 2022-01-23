@@ -2,7 +2,7 @@ class Admin::SchedulesController < Admin::Base
   before_action :admin_login_required
   
   def index
-    @schedules = Schedule.all.order(starttime: :desc)
+    @schedules = Schedule.all.order(starttime: :desc).order(theater_id: :asc)
         .page(params[:page]).per(15)
   end
   
