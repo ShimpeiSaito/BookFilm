@@ -25,13 +25,7 @@
         <tbody>
             <% @schedules.each do |sche| %>
                 <tr>
-                    <td><%= sche.thea.store_name %></td>
-                    <td><%= link_to sche.mov.title, admin_movie_path(sche.mov.id) %></td>
-                    <td><%= sche.screen_no %></td>
-                    <td><%= sche.screening_date.strftime("%Y/%m/%d") %></td>
-                    <td><%= sche.starttime.strftime('%H:%M') %></td>
-                    <td><%= sche.endtime.strftime('%H:%M') %></td>
-                    <td><%= sche.mov.screening_time %>分</td>
+
                 </tr>
             <% end %>
         </tbody>

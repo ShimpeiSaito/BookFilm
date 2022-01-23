@@ -26,6 +26,12 @@ class Schedule < ApplicationRecord
     validate :released_check
 
     def released_check
-      errors.add(:screening_date, "は公開日より前の日付は登録できません") if self.screening_date < self.mov.released_at
+      errors.add(:screening_date, "は公開開始日より前の日付は登録できません") if self.screening_date < self.mov.released_at
+    end
+
+    validate :expired_check
+
+    def expired_check
+      errors.add(:screening_date, "は公開終了日より後の日付は登録できません") if self.screening_date > self.mov.expired_at
     end
 end
