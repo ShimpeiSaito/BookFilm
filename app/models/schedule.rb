@@ -15,7 +15,7 @@ class Schedule < ApplicationRecord
         schedules = Schedule.where(thea: self.thea).where(screen_no: self.screen_no)
         unless schedules.nil?
             for sche in schedules do
-                if (sche.starttime < self.starttime && self.starttime < sche.endtime) || (sche.starttime < self.endtime && self.endtime < sche.endtime)
+                if (sche.starttime <= self.starttime && self.starttime <= sche.endtime) || (sche.starttime <= self.endtime && self.endtime <= sche.endtime)
                     errors.add(:starttime, "同スクリーンの同時刻に上映があるため登録できません")
                     break
                 end
