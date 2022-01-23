@@ -3,6 +3,7 @@ ja:
     models:
       member: 会員情報
       movie: 作品
+      schedule: 上映
     attributes:
       member:
         login_id: ログインID
@@ -23,6 +24,10 @@ ja:
         distribution: 配給
         director: 監督
         release_flag: 公開／非公開
+      schedule:
+        screening_date: 上映日
+        starttime: 上映開始時間
+        endtime: 上映終了時間
     errors:
       messages:
         wrong: が正しくありません。

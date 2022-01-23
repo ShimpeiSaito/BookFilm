@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :movies do
       get "search", on: :collection
     end
+    resources :schedules
   end
 
   resources :members, only: [:show, :create]

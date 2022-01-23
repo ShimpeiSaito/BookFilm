@@ -1,0 +1,42 @@
+<% @page_title = "上映編集" %>
+
+<h1><%= @page_title %></h1>
+
+<div class="toolbar">
+    <%= link_to "上映の新規追加", new_admin_schedule_path %>
+</div>
+
+<br>
+
+<% if @schedules.present? %>
+    ※最新の上映順
+    <table class="list">
+        <thead>
+            <tr>
+                <th width="80">上映劇場</th>
+                <th>作品タイトル</th>
+                <th width="80">スクリーンNo.</th>
+                <th>上映日</th>
+                <th>上映開始時間</th>
+                <th>上映終了時間</th>
+                <th>上映時間</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @schedules.each do |sche| %>
+                <tr>
+                    <td><%= sche.thea.store_name %></td>
+                    <td><%= link_to sche.mov.title, admin_movie_path(sche.mov.id) %></td>
+                    <td><%= sche.screen_no %></td>
+                    <td><%= sche.screening_date.strftime("%Y/%m/%d") %></td>
+                    <td><%= sche.starttime.strftime('%H:%M') %></td>
+                    <td><%= sche.endtime.strftime('%H:%M') %></td>
+                    <td><%= sche.mov.screening_time %>分</td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <%= paginate @schedules %>
+<% else %>
+    <p>上映がありません。</p>
+<% end %>

@@ -1,0 +1,27 @@
+<%= render "shared/errors", obj: @schedule %>
+
+<table class="attr">
+  <tr>
+    <th width="200"><%= form.label "劇場選択" %></th>
+    <td><%= form.collection_select :thea, @theaters.all, :id, :store_name %></td>
+  </tr>
+  <tr>
+    <th width="200"><%= form.label "作品選択" %></th>
+    <td><%= form.collection_select :mov, @movies.all, :id, :title %></td>
+  </tr>
+  <tr>
+    <th width="200"><%= form.label "スクリーン選択" %></th>
+    <td><%= form.select :screen_no, [['1', 1], ['2', 2], ['3', 3], ['4', 4], ['4', 4], ['5', 5], ['6', 6], ['7', 7], ['8', 8]] %></td>
+  </tr>
+  <tr>
+    <th><%= form.label :screening_date %></th>
+    <td><%= form.date_select :screening_date,
+              start_year: Time.current.year, end_year: Time.current.year + 10,
+              use_month_numbers: true %></td>
+  </tr>
+  <tr>
+    <th><%= form.label :starttime %></th>
+    <td><%= form.datetime_select :starttime,
+              discard_day: true, discard_month: true, discard_year: true %></td>
+  </tr>
+</table>
