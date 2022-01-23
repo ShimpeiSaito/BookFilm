@@ -31,7 +31,9 @@
         <th width="150">座席</th>
         <td>
             <% @reservationdetails.each do |resd| %>
-                <%= resd.seat + " " %>
+                <% if resd.seat.present? %>
+                    <%= resd.seat + " " %>
+                <% end %>
             <% end %>
         </td>
     </tr>
