@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2022_01_12_150500) do
     t.integer "screening_time", null: false
     t.text "distribution"
     t.string "director"
+    t.integer "release_flag", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

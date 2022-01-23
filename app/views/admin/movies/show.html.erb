@@ -38,4 +38,14 @@
     <th>監督</th>
     <td><%= @movie.director %></td>
   </tr>
+  <tr>
+    <th>公開／非公開</th>
+    <td>
+     <% if @movie.release_flag == 1 %>
+     公開
+     <% else %>
+     非公開
+     <% end %>
+    </td>
+  </tr>
 </table>

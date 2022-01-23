@@ -8,6 +8,7 @@ class CreateMovies < ActiveRecord::Migration[5.2]
       t.integer :screening_time, null: false
       t.text :distribution
       t.string :director
+      t.integer :release_flag, default: 1
 
       t.timestamps
     end

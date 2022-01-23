@@ -9,22 +9,43 @@
     <th><%= form.label :explanation %></th>
     <td><%= form.text_area :explanation, rows: 10, cols: 60 %></td>
   </tr>
-  <tr>
-    <th><%= form.label :released_at %></th>
-    <td><%= form.date_select :released_at,
-              start_year: Time.current.year - 10, end_year: Time.current.year + 10,
-              use_month_numbers: true %></td>
-  </tr>
-  <tr>
-    <th><%= form.label :expired_at %></th>
-    <td><%= form.date_select :expired_at,
-              start_year: Time.current.year, end_year: Time.current.year + 10,
-              use_month_numbers: true %></td>
-  </tr>
-  <tr>
-    <th><%= form.label :screening_time %></th>
-    <td><%= form.number_field :screening_time, {min: 1, max: 500} %>分</td>
-  </tr>
+
+  <% if @movie.id.nil? %>
+    <tr>
+      <th><%= form.label :released_at %></th>
+      <td><%= form.date_select :released_at,
+                start_year: Time.current.year - 10, end_year: Time.current.year + 10,
+                use_month_numbers: true %></td>
+    </tr>
+    <tr>
+      <th><%= form.label :expired_at %></th>
+      <td><%= form.date_select :expired_at,
+                start_year: Time.current.year, end_year: Time.current.year + 10,
+                use_month_numbers: true %></td>
+    </tr>
+    <tr>
+      <th><%= form.label :screening_time %></th>
+      <td><%= form.number_field :screening_time, {min: 1, max: 500} %>分</td>
+    </tr>
+  <% else %>
+    <tr>
+      <th><%= form.label :released_at %></th>
+      <td><%= form.date_select :released_at,
+                start_year: Time.current.year - 10, end_year: Time.current.year + 10,
+                use_month_numbers: true, disabled: true %></td>
+    </tr>
+    <tr>
+      <th><%= form.label :expired_at %></th>
+      <td><%= form.date_select :expired_at,
+                start_year: Time.current.year, end_year: Time.current.year + 10,
+                use_month_numbers: true, disabled: true %></td>
+    </tr>
+    <tr>
+      <th><%= form.label :screening_time %></th>
+      <td><%= form.number_field :screening_time, {min: 1, max: 500, disabled: true} %>分</td>
+    </tr>
+  <% end %>
+
   <tr>
     <th width="80"><%= form.label :distribution %></th>
     <td><%= form.text_field :distribution, size: 60 %></td>
@@ -33,4 +54,37 @@
     <th width="80"><%= form.label :director %></th>
     <td><%= form.text_field :director, size: 60 %></td>
   </tr>
+
+  <% if @movie.id.nil? %>
+    <tr>
+      <th><%= form.label :release_flag %></th>
+      <td><%= form.check_box :release_flag, {checked: true}, checked_value='1', unchecked_value='0' %> 公開</td>
+    </tr>
+  <% else %>
+    <% if @movie.released_at <= Date.current && @movie.expired_at >= Date.current %>
+      <% if @movie.release_flag == 1 %>
+        <tr>
+          <th><%= form.label :release_flag %></th>
+          <td><%= form.check_box :release_flag, {checked: true, disabled: true}, checked_value='1', unchecked_value='0' %> 公開</td>
+        </tr>
+      <% else %>
+        <tr>
+          <th><%= form.label :release_flag %></th>
+          <td><%= form.check_box :release_flag, {disabled: true}, checked_value='1', unchecked_value='0' %> 公開</td>
+        </tr>
+      <% end %>
+    <% else %>
+      <% if @movie.release_flag == 1 %>
+        <tr>
+          <th><%= form.label :release_flag %></th>
+          <td><%= form.check_box :release_flag, {checked: true}, checked_value='1', unchecked_value='0' %> 公開</td>
+        </tr>
+      <% else %>
+        <tr>
+          <th><%= form.label :release_flag %></th>
+          <td><%= form.check_box :release_flag, {}, checked_value='1', unchecked_value='0' %> 公開</td>
+        </tr>
+      <% end %>
+    <% end %>
+  <% end %>
 </table>

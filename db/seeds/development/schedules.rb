@@ -6,7 +6,7 @@ times = %w(9 11 13 15 17 19 21)
     movies = Movie.all.sample(rand(13..20))
     for movie in movies do
         0.upto(6) do |day|
-            date = Date.new(Time.zone.now.year, Date.zone.now.month,(Time.zone.now.day) + day)
+            date = Date.new(Time.zone.now.year, Time.zone.now.month,(Time.zone.now.day) + day)
             1.upto(3) do
                 #time = Time.zone.parse(times.sample)
                 time = Time.new(date.year, date.month, date.day, times.sample, 0, 0, '+09:00')

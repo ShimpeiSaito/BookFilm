@@ -52,7 +52,8 @@ class Admin::MoviesController < Admin::Base
       :expired_at,
       :screening_time,
       :distribution,
-      :director
+      :director,
+      :release_flag
     )
   end
 end

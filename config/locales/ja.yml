@@ -22,6 +22,7 @@ ja:
         screening_time: 上映時間
         distribution: 配給
         director: 監督
+        release_flag: 公開／非公開
     errors:
       messages:
         wrong: が正しくありません。
