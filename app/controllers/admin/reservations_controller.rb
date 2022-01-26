@@ -24,8 +24,7 @@ class Admin::ReservationsController < Admin::Base
   end
 
   def search
-    @reservations = Reservation.all.search(params[:q])
-        .page(params[:page]).per(15)
+    @reservations = Reservation.search(params[:q]).page(params[:page]).per(15)
     render "index"
   end
 
@@ -36,6 +35,11 @@ class Admin::ReservationsController < Admin::Base
 
   def confirm
     @reservations = Reservation.all.where("status = 1").order(confirm_time: :desc)
+        .page(params[:page]).per(15)
+  end
+
+  def nonconfirm
+    @reservations = Reservation.all.where("status = 0").order(confirm_time: :desc)
         .page(params[:page]).per(15)
   end
 end

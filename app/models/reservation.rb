@@ -5,25 +5,32 @@ class Reservation < ApplicationRecord
 
     class << self
         def search(query)
-            rel = order(confirm_time: :desc)
+            rel = where("status = ?", "10")
             if query.present?
-                movies = Movie.all()
-                reservations = Reservation.all()
-                check = 0
-                for mov in movies do
-                    for res in reservations do
-                        title = res.sche.mov.title
-                        if title.include?("#{query}") then
-                            check = check + 1
-                            rel = rel.where(id: res.id)
-                        end
+                movies = Movie.where("title LIKE ?", "%#{query}%")
+                if movies.present? then
+                  schedules = []
+                  for movie in movies do
+                    unless (Schedule.find_by(mov: movie.id)).nil?
+                      sches = Schedule.where(mov: movie.id)
+                      for sche in sches do
+                        schedules.push(sche.id)
+                      end
                     end
+                  end
+                  if schedules.present? then
+                    idx = 0
+                    for schedule in schedules do
+                      rel = rel.or(where("schedule_id = ?", schedules[idx]))
+                      idx = idx + 1
+                    end
+                  end
                 end
+                rel.order(confirm_time: :desc)
+            else
+                rel = all.order(confirm_time: :desc)
             end
-            if check == 0 then
-                rel = rel.where("status = 10")
-            end
-            rel
+            
         end
     end
 end

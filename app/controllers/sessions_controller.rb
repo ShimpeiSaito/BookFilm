@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
         if member&.authenticate(params[:password])
             cookies.signed[:member_id] = { value: member.id, expires: 30.minutes.from_now } #10.seconds.from_now
         else
-            flash.alert = "名前とパスワードが一致しません"
+            flash.alert = "ログインIDとパスワードが一致しません"
         end
         redirect_back_or(:root)
     end

@@ -11,8 +11,9 @@
 
 <table>
 <tr>
-    <td><%= button_to "すべて表示", :updtime_admin_reservations, {method: :get, disabled: true} %></td>
+    <td><%= button_to "更新時間順", :updtime_admin_reservations, {method: :get, disabled: true} %></td>
     <td><%= button_to "予約確定のみ表示", :confirm_admin_reservations, {method: :get} %></td>
+    <td><%= button_to "予約未確定のみ表示", :nonconfirm_admin_reservations, {method: :get} %></td>
 </tr>
 </table>
 

@@ -9,7 +9,7 @@ end
     Admin.create(
         login_id: names[idx],
         name: fnames[idx],
-        birthday: "#{rand(1980..2000)}-12-01",
+        birthday: "#{rand(1980..2020)}-#{rand(1..12)}-#{rand(1..25)}",
         tel: random_number_generator(3) + "-" + random_number_generator(4) + "-" + random_number_generator(4),
         email: "#{names[idx]}@example.com",
         password: "admin",

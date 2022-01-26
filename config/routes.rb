@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       get "search", on: :collection
       get "updtime", on: :collection
       get "confirm", on: :collection
+      get "nonconfirm", on: :collection
     end
   end
 

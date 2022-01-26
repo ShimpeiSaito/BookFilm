@@ -9,7 +9,7 @@
 <table>
 <tr>
 <% for day in 0..6 do %>
-    <% dow = Date.new(Time.zone.now.year, Time.zone.now.month, Time.zone.now.day + day) %>
+    <% dow = Date.current + day %>
     <td><%= button_to dow.strftime('%m/%d') + dows[dow.wday], {controller: 'schedules', action: 'byday'}, {method: :get, params: {movid:@movie.id, day: day}} %></td>
 <% end %>
 </tr>
@@ -24,16 +24,18 @@
                 <th>上映開始時間</th>
                 <th>上映終了時間</th>
                 <th>スクリーン</th>
+                <th>劇場名</th>
                 <th>予約購入</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody align="center">
             <% @schedules.each do |schedule| %>
                 <tr>
                     <td><%= schedule.screening_date.strftime('%Y/%m/%d') + dows[schedule.screening_date.wday] %></td>
                     <td><%= schedule.starttime.strftime('%H:%M') %></td>
                     <td><%= schedule.endtime.strftime('%H:%M') %></td>
                     <td><%= schedule.screen_no %></td>
+                    <td><%= schedule.thea.store_name %></td>
                     <td>
                         <%=link_to new_reservation_path(scheid: schedule.id) do %>
                             <button type="button" class="btn btn-warning">

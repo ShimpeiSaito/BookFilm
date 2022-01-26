@@ -2,6 +2,8 @@
 
 <h1><%= @page_title %></h1>
 
+<p>※30分以内に予約を完了しない場合は、自動的にキャンセルされます。</p>
+
 <%= form_tag("/reservation/step1", method: :post) do %>
   <table>
     <thead>

@@ -1,4 +1,4 @@
-times = %w(6 12 18 8 14 20 10 16)
+times = %w(6 12 18 8 14 20 10 16 22)
 
 1.upto(3) do |thea_idx|
     theater = Theater.find(thea_idx)
